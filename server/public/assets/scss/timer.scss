@@ -1,0 +1,13 @@
+@import "vars";
+
+.timer {
+  width: 100%;
+  background-color: $gray;
+  margin-top: 20px;
+
+  &__time {
+    width: 100%;
+    background-color: $green;
+    height: 30px;
+  }
+}

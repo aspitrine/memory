@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  node:
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile.dev
+    container_name: memory_app
+    environment:
+      - NODE_ENV=development
+    env_file: .env
+    depends_on:
+      - db
+    ports:
+      - $APP_PORT:3000
+    volumes:
+      - ./server:/usr/src/app
+    networks:
+      - memory-network
+    command: wait-for-it -t 0 memory_database:3306 -- npm run start.dev
+
+  db:
+    image: mysql:5.7
+    container_name: memory_database
+    cap_add:
+      - SYS_NICE
+    ports:
+      - $BDD_PORT:3306
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DATABASE
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+    volumes:
+      - ./database/data:/var/lib/mysql
+    networks:
+      - memory-network
+    command: --default-authentication-plugin=mysql_native_password
+
+networks:
+  memory-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+  node_modules:

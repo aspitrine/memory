@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server.js",
+    "start.dev": "nodemon index.js",
+    "scss": "node-sass --recursive 'public/assets/scss' -o 'public/assets/css'",
+    "scss-watch": "node-sass --watch --recursive 'public/assets/scss' -o 'public/assets/css'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.5",
+    "sequelize-cli": "^6.2.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "node-sass": "^4.14.1",
+    "sequelize": "^6.3.5"
+  }
+}
